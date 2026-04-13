@@ -158,7 +158,7 @@ func (c *PreflightCmd) Run(kongCtx *kong.Context, globals cli.GlobalFlags) error
 	env := map[string]string{
 		"PREFLIGHT":                         "true",
 		"BUILDKITE_PREFLIGHT":               "true", // deprecated
-		"BUILDKITE_PREFLIGHT_SOURCE_COMMIT": sourceContext.Commit,
+		"PREFLIGHT_SOURCE_COMMIT": sourceContext.Commit,
 	}
 	if sourceContext.Branch != "" {
 		env["BUILDKITE_PREFLIGHT_SOURCE_BRANCH"] = sourceContext.Branch
