@@ -133,11 +133,11 @@ func TestPreflightCmd_Run(t *testing.T) {
 		if gotReq.Env["BUILDKITE_PREFLIGHT"] != "true" {
 			t.Errorf("expected BUILDKITE_PREFLIGHT=true (deprecated), got %#v", gotReq.Env)
 		}
-		if gotReq.Env["BUILDKITE_PREFLIGHT_SOURCE_BRANCH"] != expectedSourceBranch {
-			t.Errorf("expected BUILDKITE_PREFLIGHT_SOURCE_BRANCH=%q, got %#v", expectedSourceBranch, gotReq.Env)
+		if gotReq.Env["PREFLIGHT_SOURCE_BRANCH"] != expectedSourceBranch {
+			t.Errorf("expected PREFLIGHT_SOURCE_BRANCH=%q, got %#v", expectedSourceBranch, gotReq.Env)
 		}
-		if gotReq.Env["BUILDKITE_PREFLIGHT_SOURCE_COMMIT"] != expectedSourceCommit {
-			t.Errorf("expected BUILDKITE_PREFLIGHT_SOURCE_COMMIT=%q, got %#v", expectedSourceCommit, gotReq.Env)
+		if gotReq.Env["PREFLIGHT_SOURCE_COMMIT"] != expectedSourceCommit {
+			t.Errorf("expected PREFLIGHT_SOURCE_COMMIT=%q, got %#v", expectedSourceCommit, gotReq.Env)
 		}
 		if !strings.Contains(gotUserAgent, buildkite.DefaultUserAgent) {
 			t.Errorf("expected User-Agent to contain %q, got %q", buildkite.DefaultUserAgent, gotUserAgent)
@@ -183,11 +183,11 @@ func TestPreflightCmd_Run(t *testing.T) {
 			t.Fatalf("expected no error, got: %v", err)
 		}
 
-		if _, ok := gotReq.Env["BUILDKITE_PREFLIGHT_SOURCE_BRANCH"]; ok {
-			t.Errorf("expected BUILDKITE_PREFLIGHT_SOURCE_BRANCH to be omitted in detached HEAD, got %#v", gotReq.Env)
+		if _, ok := gotReq.Env["PREFLIGHT_SOURCE_BRANCH"]; ok {
+			t.Errorf("expected PREFLIGHT_SOURCE_BRANCH to be omitted in detached HEAD, got %#v", gotReq.Env)
 		}
-		if gotReq.Env["BUILDKITE_PREFLIGHT_SOURCE_COMMIT"] != expectedSourceCommit {
-			t.Errorf("expected BUILDKITE_PREFLIGHT_SOURCE_COMMIT=%q, got %#v", expectedSourceCommit, gotReq.Env)
+		if gotReq.Env["PREFLIGHT_SOURCE_COMMIT"] != expectedSourceCommit {
+			t.Errorf("expected PREFLIGHT_SOURCE_COMMIT=%q, got %#v", expectedSourceCommit, gotReq.Env)
 		}
 	})
 

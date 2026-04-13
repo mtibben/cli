@@ -156,12 +156,12 @@ func (c *PreflightCmd) Run(kongCtx *kong.Context, globals cli.GlobalFlags) error
 	_ = renderer.Render(Event{Type: EventOperation, Time: time.Now(), PreflightID: preflightID.String(), Title: fmt.Sprintf("Creating build on %s/%s...", resolvedPipeline.Org, resolvedPipeline.Name)})
 
 	env := map[string]string{
-		"PREFLIGHT":                         "true",
-		"BUILDKITE_PREFLIGHT":               "true", // deprecated
+		"PREFLIGHT":               "true",
+		"BUILDKITE_PREFLIGHT":     "true", // deprecated
 		"PREFLIGHT_SOURCE_COMMIT": sourceContext.Commit,
 	}
 	if sourceContext.Branch != "" {
-		env["BUILDKITE_PREFLIGHT_SOURCE_BRANCH"] = sourceContext.Branch
+		env["PREFLIGHT_SOURCE_BRANCH"] = sourceContext.Branch
 	}
 
 	build, _, err := f.RestAPIClient.Builds.Create(ctx, resolvedPipeline.Org, resolvedPipeline.Name, buildkite.CreateBuild{
